@@ -1,7 +1,5 @@
 package com.mortgages.mortgage_checker.models;
 
-import com.mortgages.mortgage_checker.models.InterestRate;
-import com.mortgages.mortgage_checker.models.MortgageApplication;
 
 public class MortgageApplicationOutcome {
     private boolean isFeasible;
@@ -14,7 +12,7 @@ public class MortgageApplicationOutcome {
     private double interestRate;
 
     public MortgageApplicationOutcome(){}
-    public MortgageApplicationOutcome(MortgageApplication application, InterestRate mortgageRate){
+    public MortgageApplicationOutcome(MortgageApplication application, InterestRateRecord mortgageRate){
         this.loanValue = application.getLoanValue();
         this.income = application.getIncome();
         this.homeValue = application.getHomeValue();
@@ -46,10 +44,11 @@ public class MortgageApplicationOutcome {
     public void setAmortization(double amortization){this.amortization = amortization;}
     
     private boolean checkFeasibility(){
-        if( loanValue > 4 * income) return false;
-        if( loanValue > homeValue ) return false;
+        boolean result = true;
+        if( loanValue > 4 * income) result = false;
+        if( loanValue > homeValue ) result = false;
 
-        return true;
+        return result;
     }
 
     private double calculateMonthlyAmortization(){

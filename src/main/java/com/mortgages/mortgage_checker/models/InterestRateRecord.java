@@ -2,13 +2,13 @@ package com.mortgages.mortgage_checker.models;
 
 import java.sql.Timestamp;
 
-public class InterestRate {
+public class InterestRateRecord {
     private Integer maturityPeriod;
     private double interestRate;
     private Timestamp lastUpdate;
 
-    public InterestRate(){}
-    public InterestRate(Integer maturityPeriod, double interestRate, Timestamp lastUpdate){
+    public InterestRateRecord(){}
+    public InterestRateRecord(Integer maturityPeriod, double interestRate, Timestamp lastUpdate){
         this.maturityPeriod = maturityPeriod;
         this.interestRate = interestRate;
         this.lastUpdate = lastUpdate;

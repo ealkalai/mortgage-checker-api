@@ -13,8 +13,6 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -31,7 +29,7 @@ class MortgageCheckerControllerTest {
 	private MockMvc mockMvc;
 
     @Test
-	public void getInterestRates() throws Exception {
+	void getInterestRates() throws Exception {
 		mockMvc.perform(MockMvcRequestBuilders.get("/api/interest-rates")
             .accept(MediaType.APPLICATION_JSON))
 			.andExpect(status().isOk());
@@ -97,7 +95,7 @@ class MortgageCheckerControllerTest {
     }
     
     @Test
-    void checkMonthlyPaymentCalculations() throws Exception {
+    void checkMonthlyPaymentCalculations() {
         assertEquals(1347.13,(new MortgageApplicationOutcome(300000,100000,300000,360, 3.5)).getAmortization());
         assertEquals(2952.54,(new MortgageApplicationOutcome(300000,100000,300000,120, 3.4)).getAmortization());
     }

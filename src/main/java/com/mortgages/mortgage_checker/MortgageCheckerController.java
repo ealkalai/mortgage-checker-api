@@ -2,12 +2,11 @@ package com.mortgages.mortgage_checker;
 
 import org.springframework.web.bind.annotation.RestController;
 
-import com.mortgages.mortgage_checker.models.InterestRate;
+import com.mortgages.mortgage_checker.models.InterestRateRecord;
 import com.mortgages.mortgage_checker.models.InterestRates;
 import com.mortgages.mortgage_checker.models.MortgageApplication;
 import com.mortgages.mortgage_checker.models.MortgageApplicationOutcome;
 import com.mortgages.mortgage_checker.models.exceptions.MaturityNotSupportedException;
-import com.mortgages.mortgage_checker.InterestRatesLoaderService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -31,16 +30,16 @@ public class MortgageCheckerController {
   }
 
   @GetMapping("/interest-rates")
-  public ResponseEntity<InterestRates> GetAllInterestRates() {
+  public ResponseEntity<InterestRates> getAllInterestRates() {
     InterestRates rates = ratesInitializer.getRates();
     return new ResponseEntity<>(rates, HttpStatus.OK);
   }
   
   @PostMapping("/mortgage-check")
-  public ResponseEntity<MortgageApplicationOutcome> PostMortgageCheck(@RequestBody MortgageApplication application) {
+  public ResponseEntity<MortgageApplicationOutcome> postMortgageCheck(@RequestBody MortgageApplication application) {
     InterestRates rates = ratesInitializer.getRates();
 
-    InterestRate selectedRate = rates.getRates()
+    InterestRateRecord selectedRate = rates.getRates()
                                     .stream()
                                     .filter(p->p.getMaturityPeriod().equals(application.getMaturityPeriod()))
                                     .findFirst()

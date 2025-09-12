@@ -1,17 +1,15 @@
 package com.mortgages.mortgage_checker.models;
 
-import java.sql.Timestamp;
-import com.mortgages.mortgage_checker.models.InterestRate;
 import java.util.List;
 import java.util.ArrayList;
 
 public class InterestRates {
-    private List<InterestRate> rates;
+    private List<InterestRateRecord> rates;
 
     public InterestRates(){
-        rates = new ArrayList<InterestRate>();
+        rates = new ArrayList<InterestRateRecord>();
     }
 
-    public List<InterestRate> getRates(){return rates;}
-    public void setRates(List<InterestRate> rates){this.rates=rates;}
+    public List<InterestRateRecord> getRates(){return rates;}
+    public void setRates(List<InterestRateRecord> rates){this.rates=rates;}
 }
