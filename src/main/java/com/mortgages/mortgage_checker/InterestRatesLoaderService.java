@@ -13,10 +13,9 @@ import javax.annotation.PostConstruct;
 import java.io.File;
 import java.io.IOException;
 
-
 @Service
 public class InterestRatesLoaderService {
-    
+
     private InterestRates rates;
     private static final Logger logger = LoggerFactory.getLogger(InterestRatesLoaderService.class);
 
@@ -31,7 +30,7 @@ public class InterestRatesLoaderService {
         }
     }
 
-    public InterestRates getRates(){
+    public InterestRates getRates() {
         return rates;
     }
 }

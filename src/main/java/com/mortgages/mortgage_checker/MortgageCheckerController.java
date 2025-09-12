@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.HttpStatus;
 
-
 @RestController
 @RequestMapping("/api/")
 public class MortgageCheckerController {
@@ -34,18 +33,19 @@ public class MortgageCheckerController {
     InterestRates rates = ratesInitializer.getRates();
     return new ResponseEntity<>(rates, HttpStatus.OK);
   }
-  
+
   @PostMapping("/mortgage-check")
   public ResponseEntity<MortgageApplicationOutcome> postMortgageCheck(@RequestBody MortgageApplication application) {
     InterestRates rates = ratesInitializer.getRates();
 
     InterestRateRecord selectedRate = rates.getRates()
-                                    .stream()
-                                    .filter(p->p.getMaturityPeriod().equals(application.getMaturityPeriod()))
-                                    .findFirst()
-                                    .orElse(null);
-    if (selectedRate == null) throw new MaturityNotSupportedException("Select Maturity period from the interest rate list");
-    MortgageApplicationOutcome outcome = new MortgageApplicationOutcome(application,selectedRate);
+        .stream()
+        .filter(p -> p.getMaturityPeriod().equals(application.getMaturityPeriod()))
+        .findFirst()
+        .orElse(null);
+    if (selectedRate == null)
+      throw new MaturityNotSupportedException("Select Maturity period from the interest rate list");
+    MortgageApplicationOutcome outcome = new MortgageApplicationOutcome(application, selectedRate);
     return new ResponseEntity<>(outcome, HttpStatus.OK);
-  }  
+  }
 }
