@@ -6,7 +6,7 @@ import com.mortgages.mortgage_checker.models.InterestRate;
 import com.mortgages.mortgage_checker.models.InterestRates;
 import com.mortgages.mortgage_checker.models.MortgageApplication;
 import com.mortgages.mortgage_checker.models.MortgageApplicationOutcome;
-
+import com.mortgages.mortgage_checker.models.exceptions.MaturityNotSupportedException;
 import com.mortgages.mortgage_checker.InterestRatesLoaderService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,7 +45,7 @@ public class MortgageCheckerController {
                                     .filter(p->p.getMaturityPeriod().equals(application.getMaturityPeriod()))
                                     .findFirst()
                                     .orElse(null);
-
+    if (selectedRate == null) throw new MaturityNotSupportedException("Select Maturity period from the interest rate list");
     MortgageApplicationOutcome outcome = new MortgageApplicationOutcome(application,selectedRate);
     return new ResponseEntity<>(outcome, HttpStatus.OK);
   }  

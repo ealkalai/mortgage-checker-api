@@ -5,6 +5,7 @@
 * starting with the OpenAPI specification file
 * add basic test functionality
 * load interest rates on startup
+* check on requests having the right maturity periods
 
 ## Backend Assessment Assignment
 
