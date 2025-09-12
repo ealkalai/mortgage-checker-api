@@ -1,8 +1,10 @@
 package com.mortgages.mortgage_checker;
 
 import com.mortgages.mortgage_checker.models.MortgageApplication;
+import com.mortgages.mortgage_checker.models.MortgageApplicationOutcome;
 
 import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -80,7 +82,7 @@ class MortgageCheckerControllerTest {
 	}
 
     @Test
-    void checkMonthlyPayment() throws Exception {
+    void checkMonthlyPaymentResponse() throws Exception {
         double income = 100000.00;
         Integer maturityPeriod = 360;
         double homeValue = 300000;
@@ -92,6 +94,12 @@ class MortgageCheckerControllerTest {
             .andExpect(status().isOk())
             .andExpect(jsonPath("$.isFeasible").value("true"))
             .andExpect(jsonPath("$.amortization").value(1347.13));
+    }
+    
+    @Test
+    void checkMonthlyPaymentCalculations() throws Exception {
+        assertEquals(1347.13,(new MortgageApplicationOutcome(300000,100000,300000,360, 3.5)).getAmortization());
+        assertEquals(2952.54,(new MortgageApplicationOutcome(300000,100000,300000,120, 3.4)).getAmortization());
     }
 
     public static String asJsonString(final Object obj) {
