@@ -79,6 +79,21 @@ class MortgageCheckerControllerTest {
             .andExpect(status().isBadRequest());
 	}
 
+    @Test
+    void checkMonthlyPayment() throws Exception {
+        double income = 100000.00;
+        Integer maturityPeriod = 360;
+        double homeValue = 300000;
+        double loanValue = 300000;
+        MortgageApplication application = new MortgageApplication(income, maturityPeriod, loanValue, homeValue);
+        mockMvc.perform(MockMvcRequestBuilders.post("/api/mortgage-check")
+            .contentType(MediaType.APPLICATION_JSON)
+            .content(asJsonString(application)))
+            .andExpect(status().isOk())
+            .andExpect(jsonPath("$.isFeasible").value("true"))
+            .andExpect(jsonPath("$.amortization").value(1347.13));
+    }
+
     public static String asJsonString(final Object obj) {
         try {
             return new ObjectMapper().writeValueAsString(obj);

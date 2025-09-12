@@ -43,11 +43,13 @@ public class MortgageApplicationOutcome {
 
         // Convert annual interest rate to monthly and percentage to decimal
         double monthlyRate = (interestRate / 100) / 12;
-        int totalPayments = maturityPeriod * 12;
+        int totalPayments = maturityPeriod;
         
         // Monthly amortization formula
         double monthlyPayment = (loanValue * monthlyRate) /
                 (1 - Math.pow(1 + monthlyRate, -totalPayments));
+
+        monthlyPayment = Math.round(monthlyPayment * 100.0) / 100.0;
 
         return monthlyPayment;
     }
