@@ -47,7 +47,7 @@ class MortgageCheckerControllerTest {
             .contentType(MediaType.APPLICATION_JSON)
             .content(asJsonString(application)))
             .andExpect(status().isOk())
-            .andExpect(jsonPath("$.feasible").value("false"));
+            .andExpect(jsonPath("$.isFeasible").value("false"));
 	}
 	
     @Test
@@ -62,7 +62,7 @@ class MortgageCheckerControllerTest {
             .contentType(MediaType.APPLICATION_JSON)
             .content(asJsonString(application)))
             .andExpect(status().isOk())
-            .andExpect(jsonPath("$.feasible").value("false"));
+            .andExpect(jsonPath("$.isFeasible").value("false"));
 	}
 
     public static String asJsonString(final Object obj) {

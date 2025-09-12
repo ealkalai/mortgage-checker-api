@@ -6,6 +6,7 @@ import com.mortgages.mortgage_checker.models.MortgageApplication;
 public class MortgageApplicationOutcome {
     private MortgageApplication application;
     private InterestRate mortgageRate;
+    
     private boolean isFeasible;
     private double amortization;
 
@@ -19,8 +20,10 @@ public class MortgageApplicationOutcome {
         }
     }
     
-    public boolean isFeasible(){return this.isFeasible;}
+    public boolean getIsFeasible(){return this.isFeasible;}
+    
     public double getAmortization(){return this.amortization;}
+    public void setAmortization(double amortization){this.amortization = amortization;}
     
     private boolean checkFeasibility(){
         double loanValue = application.getLoanValue();
@@ -37,7 +40,6 @@ public class MortgageApplicationOutcome {
         double loanValue = application.getLoanValue();
         int maturityPeriod = application.getMaturityPeriod();
         double interestRate = mortgageRate.getInterestRate();
-
 
         // Convert annual interest rate to monthly and percentage to decimal
         double monthlyRate = (interestRate / 100) / 12;

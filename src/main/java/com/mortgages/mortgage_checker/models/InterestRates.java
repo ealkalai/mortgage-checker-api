@@ -12,7 +12,6 @@ public class InterestRates {
         rates = new ArrayList<InterestRate>();
     }
 
-    public List<InterestRate> getRates(){
-        return rates;
-    }
+    public List<InterestRate> getRates(){return rates;}
+    public void setRates(List<InterestRate> rates){this.rates=rates;}
 }
