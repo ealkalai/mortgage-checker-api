@@ -4,6 +4,7 @@
 
 * starting with the OpenAPI specification file
 * add basic test functionality
+* load interest rates on startup
 
 ## Backend Assessment Assignment
 

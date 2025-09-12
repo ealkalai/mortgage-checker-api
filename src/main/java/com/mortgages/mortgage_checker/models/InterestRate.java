@@ -7,6 +7,7 @@ public class InterestRate {
     private double interestRate;
     private Timestamp lastUpdate;
 
+    public InterestRate(){}
     public InterestRate(Integer maturityPeriod, double interestRate, Timestamp lastUpdate){
         this.maturityPeriod = maturityPeriod;
         this.interestRate = interestRate;
@@ -15,5 +16,5 @@ public class InterestRate {
 
     public Integer getMaturityPeriod(){return this.maturityPeriod;}
     public double getInterestRate(){return this.interestRate;}
-    public Timestamp getLastUpdated(){return this.lastUpdate;}
+    public Timestamp getLastUpdate(){return this.lastUpdate;}
 }
