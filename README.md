@@ -3,6 +3,7 @@
 ## Application progress
 
 * starting with the OpenAPI specification file
+* add basic test functionality
 
 ## Backend Assessment Assignment
 
