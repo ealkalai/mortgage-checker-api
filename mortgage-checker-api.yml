@@ -1,0 +1,101 @@
+openapi: 3.0.0
+info:
+  title: Mortgage Checker API
+  description: >
+    An API to help customers check their mortgage offer based on the 
+    latest interest rates.
+  version: 0.1.0
+servers:
+  - url: http://localhost:8080/api
+
+paths:
+  /interest-rates:
+    get:
+      summary: Get interest rates
+      description: Retrieve a list of current interest rates.
+      responses:
+        '200':
+          description: A list of interest rates.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InterestRates'
+  /mortgage-check:
+    post:
+      summary: Check and calculate a mortgage
+      description: post the parameters to calculate for a mortgage check.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MortgageApplication'
+      responses:
+        '200':
+          description: User created successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MortgageApplicationOutcome'
+components:
+  schemas:
+    InterestRate:
+      type: object
+      properties:
+        maturityPeriod:
+          type: integer
+          example: 360
+          description: the number of months for this mortgage to be repaid
+        interestRate:
+          type: number
+          format: double
+          minimum: 0
+          maximum: 100
+          example: 3.50
+          description: the interest rate percentage.
+        lastUpdate:
+          type: string
+          format: date-time
+          description: the date and time of the last update
+          example: "2025-09-12T10:00:00Z"
+    InterestRates:
+      type: object
+      properties:
+        rates:
+          type: array
+          items:
+            $ref: '#/components/schemas/InterestRate'
+    MortgageApplication:
+      type: object
+      properties:
+        income:
+          type: number
+          format: double
+          example: "70000.00"
+          description: the annual income amount in euros.
+        maturityPeriod:
+          type: integer
+          example:  360
+          description: the number of months for this mortgage to be repaid
+        loanValue:
+          type: number
+          format: double
+          example: 350000.00
+          description: the desired loan value amount in euros.
+        homeValue:
+          type: number
+          format: double
+          example: 350000.00
+          description: the value of the desired house to be purchased.
+    MortgageApplicationOutcome:
+      type: object
+      properties:
+        feasible:
+          type: boolean
+          example: true
+          description: the feasibility of the mortgage, given the input parameters
+        amortization:
+          type: number
+          format: double
+          example: 625.00
+          description: the monthly cost of the mortgage.
