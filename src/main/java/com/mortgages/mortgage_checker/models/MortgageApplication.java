@@ -1,9 +1,24 @@
 package com.mortgages.mortgage_checker.models;
 
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Positive;
+
 public class MortgageApplication {
+    @NotNull
+    @Positive(message="income must be positive number")
     private double income;
+
+    @NotNull
+    @Min(1)
     private Integer maturityPeriod;
+    
+    @NotNull
+    @Min(1)
     private double loanValue;
+    
+    @NotNull
+    @Min(1)
     private double homeValue;
 
     public MortgageApplication() {
